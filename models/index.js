@@ -2,22 +2,27 @@
 const Sequelize = require('sequelize');
 const config = require('../config/db.config');
 
-const sequelize = new Sequelize(config.DB,config.USER,config.PASSWORD,{
-    host:config.HOST,
-    port : config.port,
-    dialect: config.dialect,
-    pool: {
-        max:config.pool.max,
-        min:config.pool.min,
-        acquire:config.pool.acquire,
-        idle:config.pool.idle
-    }
+const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
+  host: config.HOST,
+  port: config.port,
+  dialect: config.dialect,
+  pool: {
+    max: config.pool.max,
+    min: config.pool.min,
+    acquire: config.pool.acquire,
+    idle: config.pool.idle
+  }
 });
 
 const db = {};
 db.sequelize = sequelize;
 
-db.user = require('./user/use.model')(sequelize,Sequelize)
+db.user = require('./user/user.model')(sequelize, Sequelize);
+db.post = require('./post/post.model')(sequelize, Sequelize);
+
+db.post.belongsTo(db.user, {
+  foreignKey: 'createdBy'
+})
 
 sequelize
   .authenticate()

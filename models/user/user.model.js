@@ -1,4 +1,3 @@
-// const { Sequelize } = require("sequelize/types");
 
 module.exports = (sequelize,Sequelize) => {
     const user = sequelize.define('user',{
@@ -19,4 +18,5 @@ module.exports = (sequelize,Sequelize) => {
             type:Sequelize.INTEGER
         },
     })
+    return user
 }
