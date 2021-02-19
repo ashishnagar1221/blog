@@ -8,15 +8,18 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const user = require('./routes/auth');
-app.use('/api/account',user);
+app.use('/api/account', user);
 
-app.get('/', function(req, res){
-   res.send("Hello world!");
+const post = require('./routes/post');
+app.use('/api/post', post)
+
+app.get('/', function (req, res) {
+    res.send("Hello world!");
 });
 
 const db = require('./models/index');
-db.sequelize.sync({force:true});
+// db.sequelize.sync({ force: true });
 
 app.listen(port, () => {
-    console.log(`Server will be running at port: ${ port}`);
+    console.log(`Server will be running at port: ${port}`);
 });

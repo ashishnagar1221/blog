@@ -8,15 +8,20 @@ module.exports = (sequelize,Sequelize) => {
             autoIncrement:true
         },
         name:{
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull:true,
         },
         phone_number:{
             type: Sequelize.STRING,
             unique: true,
         },
         email:{
-            type:Sequelize.INTEGER
+            type:Sequelize.STRING,
+            unique : true
         },
+        password:{
+            type:Sequelize.STRING,
+        }
     })
     return user
 }
