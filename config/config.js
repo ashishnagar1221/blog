@@ -8,5 +8,6 @@ CONFIG.db_name = process.env.DB_NAME || 'blog';
 CONFIG.db_user = process.env.DB_USER || 'root';
 CONFIG.db_password = process.env.DB_PASSWORD || '';
 
+CONFIG.aws_String = process.env.JWT_ENCRYPTION || 'JWT_ENC';
 
 module.exports = CONFIG;

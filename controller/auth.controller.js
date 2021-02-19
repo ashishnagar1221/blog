@@ -2,6 +2,7 @@
 const valid = require('validator');
 const db = require('../models')
 const jwt = require('jsonwebtoken');
+const CONFIG = require('../config/config');
 const User = db.user
 
 
@@ -47,7 +48,6 @@ exports.login = async (req, res, next) => {
     const password = req.body.password;
     let ret = null;
     ret = await User.findOne({ where: { email } })
-    // console.log(ret);
     if (ret === null) {
         return res.json("User not found");
     }
@@ -58,7 +58,7 @@ exports.login = async (req, res, next) => {
         const data = {
             accessToken: jwt.sign({
                 ret
-            },"JWT_ENC", {
+            },CONFIG.aws_String, {
                 expiresIn: 86400, // 24 hours
             },
             )

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const CONFIG = require('../config/config');
 const db = require('../models')
 const User = db.user;
 
@@ -7,7 +8,7 @@ const verifyAuth = (req,res,next) => {
     if(!token) {
         return res.json("No token provided")
     }
-    jwt.verify(token,"JWT_ENC",(err,decoded) => {
+    jwt.verify(token,CONFIG.aws_String,(err,decoded) => {
         if(err){
             return res.json("Unauthorized!")
         }
